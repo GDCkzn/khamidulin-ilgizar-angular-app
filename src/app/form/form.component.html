@@ -13,21 +13,21 @@
             </div>
             <div class="col-sm">
                 <label class="form-label">Status</label>
-                <select class="form-select" [(ngModel)] = "status">
+                <select class="selectpicker form-control" [(ngModel)] = "status">
                     <option value="ToDo">ToDo</option>
                     <option value="InProgress">InProgress</option>
                     <option value="Done">Done</option>
               </select>
             </div>
-            <label class="form-label" style="color:#ca2735;margin-top: 5px; margin-bottom: -1px;" *ngIf="!nonEmpty">Заполните все поля</label>
             <div class="col-sm d-flex justify-content-center">
                 <button type="button" class="btn btn-primary" style="margin-top: 5px;" (click)="addTask()">New Task</button>
-            </div>  
+            </div>
         </div> 
         <div class="col-sm">
         </div>       
     </div>
 </div>
+
 
 
   

@@ -1,22 +1,22 @@
-import { TaskService } from './../services/tasks.service';
+
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { DataServiceService } from '../services/data-service.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
+
 })
 export class FormComponent implements OnInit {
-  nonEmpty: boolean = true;
-
   name: string = "";
   description: string = "";
   status: string = "";
 
-  isForm: boolean = true;
   formattedDate;
 
-  constructor(public taskService: TaskService) {
+  constructor(public dataService: DataServiceService, public toastService: ToastService) {
     const datepipe: DatePipe = new DatePipe('en-En')
     this.formattedDate = datepipe.transform(Date.now(), 'dd MMM YYYY HH:mm')
   }
@@ -27,8 +27,8 @@ export class FormComponent implements OnInit {
 
   addTask() {
     if (this.name && this.description && this.status != ""){
-      this.nonEmpty = true
-      this.taskService.addTask({
+      this.toastService.show('Success', { classname: 'bg-success text-light', delay: 3000 });
+      this.dataService.addTask({
         name: this.name,
         description: this.description,
         date: this.formattedDate,
@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
       this.status = "";
       return;
     }
-    this.nonEmpty = false
+    this.toastService.show('Fill all of the field', { classname: 'bg-danger text-light', delay: 3000 });
     return;
   }
 }

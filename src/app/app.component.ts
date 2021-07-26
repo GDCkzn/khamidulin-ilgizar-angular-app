@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'tasks-app';
@@ -13,11 +13,5 @@ export class AppComponent {
 
   ngOnInit(): void {
 
-  }
-  toHome(){
-    this.isHome = true;
-  }
-  toTable(){
-    this.isHome = false;
   }
 }

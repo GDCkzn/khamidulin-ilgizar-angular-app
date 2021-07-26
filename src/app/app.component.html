@@ -1,14 +1,7 @@
-<div class="container">
-  <header class="d-flex justify-content-center py-3">
-    <ul class="nav nav-pills">
-      <li class="nav-item"><a class="nav-link" (click)="toHome()">New Task</a></li>
-      <li class="nav-item"><a class="nav-link" (click)="toTable()">View All</a></li>
-    </ul>
-  </header>
-</div>
+<app-header></app-header>
 <body>
   <div>
-    <app-table *ngIf="!isHome;"></app-table>
-    <app-form *ngIf="isHome;"></app-form>
+    <router-outlet></router-outlet>
   </div>
 </body>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
