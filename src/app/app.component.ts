@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tasks-app';
+  isHome: boolean = true;
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+  toHome(){
+    this.isHome = true;
+  }
+  toTable(){
+    this.isHome = false;
+  }
 }
