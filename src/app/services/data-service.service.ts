@@ -1,5 +1,6 @@
-import { from, merge, Observable } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { __values } from 'tslib';
 
 
 export interface TaskElement {
@@ -13,14 +14,16 @@ export interface TaskElement {
   providedIn: 'root'
 })
 export class DataServiceService {
-  public tasksStream = new Observable<TaskElement>();
+
+  public tasks$ = new BehaviorSubject<TaskElement[]>([]);
+
   constructor() {}
- 
-  getTasksStream() : Observable<TaskElement>{
-    return this.tasksStream;
+  
+  getTasksStream(){
+    return this.tasks$;
   }
-  addTasks(stream: any){
-    this.tasksStream = merge(this.tasksStream, stream)
+  addTask(task: TaskElement){
+    this.tasks$.next([...this.tasks$.getValue(), task])
   }
 }
 

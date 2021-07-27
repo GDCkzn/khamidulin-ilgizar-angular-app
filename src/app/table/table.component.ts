@@ -18,13 +18,12 @@ export class TableComponent implements OnInit {
   
   ngOnInit(): void {
     this.tasks = [];
-    this.dataService.getTasksStream().subscribe((data: TaskElement) => {
-      this.tasks.push(data);
-    });
+    this.dataService.getTasksStream().subscribe(data => {
+      for(let task of data) this.tasks.push(task);
+    })
   }
   deleteTask(){
     this.tasks = this.tasks.filter(t => t.name !== this.name);
     this.name = '';
   }
-
 }

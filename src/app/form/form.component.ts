@@ -28,12 +28,12 @@ export class FormComponent implements OnInit {
   addTask() {
     if (this.name && this.description && this.status != ""){
       this.toastService.show('Success', { classname: 'bg-success text-light', delay: 3000 });
-      this.dataService.addTasks(from([{
+      this.dataService.addTask({
         name: this.name,
         description: this.description,
         date: this.formattedDate,
         status: this.status
-      }]));
+      });
       this.name= "";
       this.description = "";
       this.status = "";
