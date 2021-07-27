@@ -5,10 +5,10 @@
             </ngx-datatable>
             <div class="d-flex justify-content-center">
                 <div class="col-sm">
-                    <input type="text" class="form-control col-sm" placeholder="Name of the task" [(ngModel)] = "name">
+                    <input type="text" class="form-control col-sm" placeholder="Name of the task" [formControl] = "name">
                 </div>
                 <div class="col-sm">
-                    <button type="button" class="btn btn-danger col-sm" style="margin-left: 5px;" (click)="deleteTask()">Delete</button>
+                    <button type="button" class="btn btn-danger col-sm" style="margin-left: 5px;">Delete</button>
                 </div>
             </div>
         </div>

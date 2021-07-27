@@ -1,3 +1,5 @@
+import { DataServiceService } from './services/data-service.service';
+import { ToastService } from './services/toast.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,9 +11,11 @@ export class AppComponent {
   title = 'tasks-app';
   isHome: boolean = true;
 
-  constructor() { }
+  constructor(public toastService: ToastService, public dataService: DataServiceService) { }
 
   ngOnInit(): void {
-
+    this.dataService.getTasksStream().subscribe((tasks) => {
+      this.toastService.show('Success', { classname: 'bg-success text-light', delay: 3000 });
+    })
   }
 }

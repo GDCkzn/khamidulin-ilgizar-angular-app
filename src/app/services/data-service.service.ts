@@ -1,13 +1,13 @@
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { __values } from 'tslib';
+
 
 
 export interface TaskElement {
-  name: string;
-  description: string;
-  date: any;
-  status: string;
+  name?: string;
+  description?: string;
+  date?: any;
+  status?: string;
 }
 
 @Injectable({

@@ -5,22 +5,22 @@
         <div class="col-sm">
             <div class="col-sm">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" [(ngModel)] = "name">
+                <input type="text" class="form-control" [formControl] = "name">
             </div>
             <div class="col-sm">
                 <label class="form-label">Description</label>
-                <input type="text" class="form-control" [(ngModel)] = "description">
+                <input type="text" class="form-control" [formControl] = "description">
             </div>
             <div class="col-sm">
                 <label class="form-label">Status</label>
-                <select class="selectpicker form-control" [(ngModel)] = "status">
+                <select class="selectpicker form-control" [formControl] = "status">
                     <option value="ToDo">ToDo</option>
                     <option value="InProgress">InProgress</option>
                     <option value="Done">Done</option>
               </select>
             </div>
             <div class="col-sm d-flex justify-content-center">
-                <button type="button" class="btn btn-primary" style="margin-top: 5px;" (click)="addTask()">New Task</button>
+                <button type="button" [disabled] = "!(this.name.valid && this.description.valid && this.status.valid)" class="btn btn-primary" style="margin-top: 5px;" (click)="addTask()">New Task</button>
             </div>
         </div> 
         <div class="col-sm">

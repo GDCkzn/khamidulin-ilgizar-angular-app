@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataServiceService, TaskElement } from '../services/data-service.service';
 import { ToastService } from '../services/toast.service';
@@ -10,7 +11,7 @@ import { ToastService } from '../services/toast.service';
 })
 
 export class TableComponent implements OnInit {
-  name: any;
+  name = new FormControl('');
   tasks: TaskElement[] = [];
   columns = [{ prop: 'name' }, { name: 'Description' }, { name: 'Date' }, { name: 'Status' }];
   
@@ -22,8 +23,8 @@ export class TableComponent implements OnInit {
       for(let task of data) this.tasks.push(task);
     })
   }
-  deleteTask(){
-    this.tasks = this.tasks.filter(t => t.name !== this.name);
-    this.name = '';
-  }
+  // deleteTask(){
+  //   this.tasks = this.tasks.filter(t => t.name !== this.name);
+  //   this.name = '';
+  // }
 }
