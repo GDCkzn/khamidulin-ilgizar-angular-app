@@ -1,4 +1,6 @@
+import { from, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+
 
 export interface TaskElement {
   name: string;
@@ -12,7 +14,7 @@ export interface TaskElement {
 })
 export class DataServiceService {
   public tasks: TaskElement[] = [];
-  
+
   constructor() { }
 
   columns = [{ prop: 'name' }, { name: 'Description' }, { name: 'Date' }, { name: 'Status' }];
@@ -23,7 +25,7 @@ export class DataServiceService {
   deleteTask(name:string){
       this.tasks = this.tasks.filter(t => t.name !== name);
   }
-  getTasks(): TaskElement[]{
-      return this.tasks;
+  getTasksStream() : Observable<TaskElement>{
+    return from(this.tasks)
   }
 }

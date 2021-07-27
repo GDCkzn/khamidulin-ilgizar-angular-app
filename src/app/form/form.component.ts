@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DataServiceService } from '../services/data-service.service';
@@ -22,9 +21,9 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
   }
-
+  
   addTask() {
     if (this.name && this.description && this.status != ""){
       this.toastService.show('Success', { classname: 'bg-success text-light', delay: 3000 });
