@@ -12,6 +12,7 @@ import { ToastService } from '../services/toast.service';
 export class TableComponent implements OnInit {
   name: any;
   tasks: TaskElement[] = [];
+  columns = [{ prop: 'name' }, { name: 'Description' }, { name: 'Date' }, { name: 'Status' }];
   
   constructor(public dataService: DataServiceService, public router:Router, public toastService: ToastService) { }
   
@@ -22,7 +23,8 @@ export class TableComponent implements OnInit {
     });
   }
   deleteTask(){
-    this.dataService.deleteTask(this.name);
+    this.tasks = this.tasks.filter(t => t.name !== this.name);
     this.name = '';
   }
+
 }

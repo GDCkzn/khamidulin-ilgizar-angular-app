@@ -1,4 +1,4 @@
-import { from, Observable } from 'rxjs';
+import { from, merge, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 
@@ -13,19 +13,16 @@ export interface TaskElement {
   providedIn: 'root'
 })
 export class DataServiceService {
-  public tasks: TaskElement[] = [];
-
-  constructor() { }
-
-  columns = [{ prop: 'name' }, { name: 'Description' }, { name: 'Date' }, { name: 'Status' }];
-  addTask(task: TaskElement){
-      this.tasks.push(task);
-      this.tasks = [...this.tasks];
-  }
-  deleteTask(name:string){
-      this.tasks = this.tasks.filter(t => t.name !== name);
-  }
+  public tasksStream = new Observable<TaskElement>();
+  constructor() {}
+ 
   getTasksStream() : Observable<TaskElement>{
-    return from(this.tasks)
+    return this.tasksStream;
+  }
+  addTasks(stream: any){
+    this.tasksStream = merge(this.tasksStream, stream)
   }
 }
+
+
+
