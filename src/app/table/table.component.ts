@@ -15,7 +15,8 @@ export class TableComponent implements OnInit {
   tasks: TaskElement[] = [];
   columns = [{ prop: 'name' }, { name: 'Description' }, { name: 'Date' }, { name: 'Status' }];
   
-  constructor(public dataService: DataServiceService, public router:Router, public toastService: ToastService) { }
+  constructor(public dataService: DataServiceService, public router:Router, public toastService: ToastService) {
+  }
   
   ngOnInit(): void {
     this.tasks = [];

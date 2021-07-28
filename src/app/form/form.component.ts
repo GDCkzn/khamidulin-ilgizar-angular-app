@@ -21,23 +21,25 @@ export class FormComponent implements OnInit {
   ]);
   
 
-  formattedDate;
+  formattedDate: any;
 
-  constructor(public dataService: DataServiceService, public toastService: ToastService) {
-    const datepipe: DatePipe = new DatePipe('en-En')
-    this.formattedDate = datepipe.transform(Date.now(), 'dd MMM YYYY HH:mm')
-  }
+  constructor(public dataService: DataServiceService, public toastService: ToastService) {}
 
   ngOnInit(): void {
-  
+    
   }
   
   addTask() {
+    const datepipe: DatePipe = new DatePipe('en-En')
+    this.formattedDate = datepipe.transform(Date.now(), 'dd MMM YYYY HH:mm')
     this.dataService.addTask({
       name: this.name.value,
       description: this.description.value,
       date: this.formattedDate,
       status: this.status.value
     });
+    this.name.setValue('');
+    this.description.setValue('');
+    this.status.setValue('');
   }
 }

@@ -15,7 +15,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.dataService.getTasksStream().subscribe((tasks) => {
-      this.toastService.show('Success', { classname: 'bg-success text-light', delay: 3000 });
+      if(tasks.length !== 0)  this.toastService.show('Success', { classname: 'bg-success text-light', delay: 3000 });
     })
   }
 }
