@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DataServiceService } from '../services/data-service.service';
 import { ToastService } from '../services/toast.service';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-form',
@@ -10,16 +11,13 @@ import { FormControl, Validators } from '@angular/forms';
 
 })
 export class FormComponent implements OnInit {
-  name = new FormControl('',[
-    Validators.required,
-  ]);
-  description = new FormControl('',[
-    Validators.required,
-  ]);
-  status = new FormControl('',[
-    Validators.required
-  ]);
+  formForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required)
+  });
   
+
 
   formattedDate: any;
 
@@ -29,17 +27,23 @@ export class FormComponent implements OnInit {
     
   }
   
-  addTask() {
+  addTask() {                  
     const datepipe: DatePipe = new DatePipe('en-En')
     this.formattedDate = datepipe.transform(Date.now(), 'dd MMM YYYY HH:mm')
     this.dataService.addTask({
-      name: this.name.value,
-      description: this.description.value,
+      name: this.formForm.value['name'],
+      description: this.formForm.value['description'],
       date: this.formattedDate,
-      status: this.status.value
+      status: this.formForm.value['status']
     });
-    this.name.setValue('');
-    this.description.setValue('');
-    this.status.setValue('');
+    this.formForm.setValue({
+      name: "",
+      description: "",
+      status: ""
+    });
   }
 }
+function delay(arg0: number) {
+  throw new Error('Function not implemented.');
+}
+

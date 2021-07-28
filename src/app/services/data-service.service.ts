@@ -22,6 +22,7 @@ export class DataServiceService {
   getTasksStream(){
     return this.tasks$;
   }
+  
   addTask(task: TaskElement){
     this.tasks$.next([...this.tasks$.getValue(), task])
   }
