@@ -1,16 +1,23 @@
 <div class="container">
     <div class="d-flex justify-content-center">
         <div class="column">
-            <ngx-datatable [rows]="this.dataService.getTasksStream() | async" [columns]="columns">
+            <ngx-datatable [rows]=" tasks$ | async" [columns]="columns">
             </ngx-datatable>
-            <div class="d-flex justify-content-center">
+        </div>
+        <div class="row">
+            <form>
                 <div class="col-sm">
-                    <input type="text" class="form-control col-sm" placeholder="Name of the task" [formControl] = "name">
+                    <label class="form-label">Sort by status</label>  
                 </div>
-                <div class="col-sm">
-                    <button type="button" class="btn btn-danger col-sm" style="margin-left: 5px;">Delete</button>
+                <div class="row-sm">
+                    <select class="selectpicker form-control" [formControl]="status" >
+                        <option value="All">All</option>
+                        <option value="ToDo">ToDo</option>
+                        <option value="InProgress">InProgress</option>
+                        <option value="Done">Done</option>
+                    </select>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
