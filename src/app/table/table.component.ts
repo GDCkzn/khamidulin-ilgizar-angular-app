@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest, Observable, pipe, Subject, BehaviorSubject } from 'rxjs';
-import { filter, isEmpty, map, startWith, tap} from 'rxjs/operators';
+import { filter, isEmpty, last, map, startWith, tap} from 'rxjs/operators';
 import { DataServiceService, TaskElement } from '../services/data-service.service';
 import { ToastService } from '../services/toast.service';
 
@@ -18,15 +18,20 @@ export class TableComponent implements OnInit {
   tasks$: Observable<TaskElement[]>;
   status$: Observable<String>;
 
+
   columns = [{ prop: 'name' }, { name: 'Description' }, { name: 'Date' }, { name: 'Status' }];
   
   constructor(public dataService: DataServiceService, public router:Router, public toastService: ToastService) {
     this.tasks$ = this.dataService.getTasksStream();
+    this.tasks$.subscribe(tasks => {
+      this.status.setValue(tasks[tasks.length-1].status);
+    });
     this.status$ = this.status.valueChanges;
   }
 
   ngOnInit(): void {
-    this.tasks$ = combineLatest([this.tasks$, this.status$.pipe(startWith('All'))]).pipe(
+    
+    this.tasks$ = combineLatest([this.tasks$, this.status$.pipe(startWith(this.status.value))]).pipe(
       map(([tasks, status]) => {
         if(status !== "All")  tasks = tasks.filter(task => task.status === status);
         this.toastService.show(`Tasks count: ${tasks.length}`, { classname: 'bg-success text-light', delay: 2000 });
