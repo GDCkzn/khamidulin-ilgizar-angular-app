@@ -11,12 +11,7 @@ export class AppComponent {
   title = 'tasks-app';
   isHome: boolean = true;
 
-  constructor(public toastService: ToastService, public dataService: DataServiceService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.dataService.getTasksStream().subscribe((tasks) => {
-      let i = tasks.length 
-      this.toastService.show(`Tasks count: ${i}`, { classname: 'bg-success text-light', delay: 3000 });
-    })
-  }
+  ngOnInit(): void {}
 }

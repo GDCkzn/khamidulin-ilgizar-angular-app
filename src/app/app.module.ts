@@ -11,6 +11,12 @@ import { TableComponent } from './table/table.component';
 import { FormComponent } from './form/form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastComponent } from './toast/toast.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 const routes: Routes = [
   { path: '', component: FormComponent },
@@ -30,7 +36,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgxDatatableModule,
     RouterModule.forRoot(routes),
-    NgbModule
+    NgbModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AppEffects])
   ],
   bootstrap: [AppComponent]
 })
