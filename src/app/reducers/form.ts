@@ -3,20 +3,20 @@ import { createAction, createFeatureSelector, createReducer, createSelector, on,
 export const LAST_DATA_KEY = 'LastData';
 
 export const add = createAction('[FORM] add',
-    props<{name: string, description:string, date: number, status: string}>()
+    props<{name: string, description:string, date: any, status: string}>()
 );
 
 export interface FormState{
     name: string;
     description: string;
-    date: number;
+    date: any;
     status: string;
 }
 
 export const initialState: FormState = {
     name: "",
     description: "",
-    date: 0,
+    date: "",
     status: "All"
 };
 

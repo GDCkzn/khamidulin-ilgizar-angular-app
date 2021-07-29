@@ -17,6 +17,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
+import { DatePipe } from '@angular/common';
 
 const routes: Routes = [
   { path: '', component: FormComponent },
@@ -42,6 +43,9 @@ const routes: Routes = [
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppEffects])
+  ],
+  providers: [
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

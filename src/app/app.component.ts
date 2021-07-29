@@ -1,6 +1,8 @@
+import { addToTable } from './reducers/table';
 import { DataServiceService } from './services/data-service.service';
 import { ToastService } from './services/toast.service';
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'tasks-app';
-  isHome: boolean = true;
 
-  constructor() { }
+  constructor(private store:Store, private dataService: DataServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataService.getTasksStream().subscribe( tasks =>{
+      this.store.dispatch(addToTable({data: tasks}));
+    });
+  }
 }
